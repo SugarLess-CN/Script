@@ -10,7 +10,7 @@ services:
     ports:
       - 127.0.0.1:3008:3000
     networks:
-      - suger-network
+      - sugar-network
 networks:
-  suger-network:
+  sugar-network:
     external: true
