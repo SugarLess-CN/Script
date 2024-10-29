@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: sugerlessapi
+    image: ghcr.io/palomiku/sugerless:latest
+    restart: always
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST)
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+    ports:
+      - 3008:3000
+    networks:
+      - suger-network
+    depends_on:
+      - db
+
+  db:
+    container_name: sugarlessdb
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - suger-network
+
+networks:
+  suger-network:
+    external: true
