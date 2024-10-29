@@ -1,0 +1,16 @@
+services:
+  saikono:
+    container_name: Saikono
+    image: ghcr.io/palomiku/saikono:latest
+    restart: always
+    environment:
+      - NUXT_PUBLIC_API_BASE_URL=${NUXT_PUBLIC_API_BASE_URL}
+      - NUXT_PUBLIC_SITE_BASE_URL=${NUXT_PUBLIC_SITE_BASE_URL}
+      - NUXT_PUBLIC_SITE_NAME=${NUXT_PUBLIC_SITE_NAME}
+    ports:
+      - 127.0.0.1:3008:3000
+    networks:
+      - suger-network
+networks:
+  suger-network:
+    external: true
